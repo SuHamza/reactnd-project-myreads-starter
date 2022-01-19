@@ -4,13 +4,18 @@ import React from "react";
 const ListBook = (props) => {
     // Get Required Book from Props
     const book = props.book;
+    const updateShelf= props.updateShelf;
+    const handleChange = (event) => {
+        let shelf = event.target.value;
+        updateShelf(shelf, book);
+    }
     return (
        <li key={book.id}>
             <div className="book">
             <div className="book-top">
                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                 <div className="book-shelf-changer">
-                <select>
+                <select value={book.shelf} onChange={handleChange} >
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>

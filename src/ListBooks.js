@@ -13,7 +13,7 @@ const ListBooks = (props) => {
                 <ol className="books-grid">
                     {books.filter(book => book.shelf === "currentlyReading")
                     .map((book) => (
-                        <ListBook book={book} />
+                        <ListBook book={book} updateShelf={props.updateShelf} />
 
                     ))}
                 </ol>
@@ -25,7 +25,7 @@ const ListBooks = (props) => {
                 <ol className="books-grid">
                     {books.filter(book => book.shelf === "wantToRead")
                     .map((book) => (
-                        <ListBook book={book} />
+                        <ListBook book={book} updateShelf={props.updateShelf} />
                     ))}
                 </ol>
                 </div>
@@ -36,7 +36,7 @@ const ListBooks = (props) => {
                 <ol className="books-grid">
                     {books.filter(book => book.shelf === "read")
                     .map((book) => (
-                        <ListBook book={book} />
+                        <ListBook book={book} updateShelf={props.updateShelf} />
                     ))}
                 </ol>
                 </div>

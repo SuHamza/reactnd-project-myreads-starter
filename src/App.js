@@ -27,9 +27,18 @@ const BooksApp = (props) => {
       .then((books) => {
         setBooks(books)
       })
-  }, []);
+  }, [books]);
   
-    console.log(books);
+  // Update Book Shelf
+  const updateShelf = (shelf, book) => {
+    book.shelf = shelf;
+    console.log(book);
+    setBooks({...books, [book.id]: book});
+    console.log('Updated Books::: ', books);
+    BooksAPI.update(book, shelf)
+      .then()
+  }
+  console.log('Books::', typeof(books));
     return (
       <div className="app">
         {showSearchPage ? (
@@ -60,7 +69,7 @@ const BooksApp = (props) => {
             </div>
             {/* Books data should be fully loaded before listing books */
              books.length && (
-              <ListBooks books={books} />
+              <ListBooks books={books} updateShelf={updateShelf} />
              )
             }
             <div className="list-books-content">
