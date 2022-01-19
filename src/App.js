@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
+import ListBooks from './ListBooks';
 
 /** Convert Classes to Functional Components
  * to be able to use Hooks
@@ -17,8 +18,18 @@ const BooksApp = (props) => {
   // }
   
   const [showSearchPage, setShowSearchPage] = useState(false);
+  // Initialize books State
+  const [books, setBooks] = useState([]);
+  // Use API to Fetch Remote Books
+  // When Component Mounts
+  useEffect(() => {
+    BooksAPI.getAll()
+      .then((books) => {
+        setBooks(books)
+      })
+  }, []);
   
-    console.log(BooksAPI.getAll());
+    console.log(books);
     return (
       <div className="app">
         {showSearchPage ? (
@@ -47,6 +58,11 @@ const BooksApp = (props) => {
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
+            {/* Books data should be fully loaded before listing books */
+             books.length && (
+              <ListBooks books={books} />
+             )
+            }
             <div className="list-books-content">
               <div>
                 <div className="bookshelf">
