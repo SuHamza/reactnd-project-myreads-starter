@@ -9,11 +9,12 @@ const ListBook = (props) => {
         let shelf = event.target.value;
         updateShelf(shelf, book);
     }
+    // console.log('ListBook:::', book);
     return (
        <li key={book.id}>
             <div className="book">
             <div className="book-top">
-                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+                <div className="book-cover" style={book.imageLinks && { width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                 <div className="book-shelf-changer">
                 <select value={book.shelf} onChange={handleChange} >
                     <option value="move" disabled>Move to...</option>
@@ -25,7 +26,7 @@ const ListBook = (props) => {
                 </div>
             </div>
             <div className="book-title">{book.title}</div>
-            <div className="book-authors">{book.authors.join(' - ')}</div>
+            <div className="book-authors">{book.authors && book.authors.join(' - ')}</div>
             </div>
         </li>
 
