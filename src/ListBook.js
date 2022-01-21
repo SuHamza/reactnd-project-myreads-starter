@@ -9,11 +9,11 @@ const ListBook = (props) => {
         let shelf = event.target.value;
         updateShelf(shelf, book);
     }
-    // If book has no shelf key
-    if (!('shelf' in book)) {
-        // Set shelf to 'None'
-        book.shelf = 'none';
-    }
+    // // If book has no shelf key
+    // if (!('shelf' in book)) {
+    //     // Set shelf to 'None'
+    //     book.shelf = 'none';
+    // }
     // console.log('ListBook:::', book);
     return (
        <li key={book.id}>

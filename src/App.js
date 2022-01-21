@@ -54,6 +54,7 @@ const BooksApp = (props) => {
       
     }
     console.log('Search Result::: ', searchResult);
+    
   }
 
   useEffect(() => {
@@ -95,7 +96,7 @@ const BooksApp = (props) => {
                 <div>No Results!</div>
                 :
                 // <div>Result: {searchResult.length}</div>
-                <ListBooks books={searchResult} updateShelf={updateShelf} />
+                <ListBooks books={searchResult} updateShelf={updateShelf} search={true} userBooks={books} />
               }
             </div>
           </div>
@@ -106,7 +107,7 @@ const BooksApp = (props) => {
             </div>
             {/* Books data should be fully loaded before listing books */
              books.length && (
-              <ListBooks books={books} updateShelf={updateShelf} />
+              <ListBooks books={books} updateShelf={updateShelf} search={false} />
              )
             }
             
