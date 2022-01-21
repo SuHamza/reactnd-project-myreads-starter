@@ -45,7 +45,7 @@ const ListBooks = (props) => {
                 <h2 className="bookshelf-title">Not Listed</h2>
                 <div className="bookshelf-books">
                 <ol className="books-grid">
-                    {books.filter(book => book.shelf === "None" || !('shelf' in book))
+                    {books.filter(book => book.shelf === "none" || !('shelf' in book))
                     .map((book) => (
                         <ListBook book={book} updateShelf={props.updateShelf} />
                     ))}

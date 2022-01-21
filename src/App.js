@@ -47,12 +47,10 @@ const BooksApp = (props) => {
     // setQuery(query.trim());
     if (query !== '')
     {
-      // useEffect(() => {
-        BooksAPI.search(query)
-          .then((res) => {
-          setSearchResult(res)
-        })
-      // }, [query]);
+      BooksAPI.search(query)
+        .then((res) => {
+        setSearchResult(res)
+      })
       
     }
     console.log('Search Result::: ', searchResult);
