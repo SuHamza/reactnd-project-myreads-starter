@@ -7,6 +7,7 @@ const ListBooks = (props) => {
     const search = props.search;
     if (search) {
         const userBooks = props.userBooks;
+        console.log('UserBooks:::', userBooks);
         // Check if result already listed to get its shelf
         books.map((res) => {
             // If book has no shelf key
@@ -17,7 +18,7 @@ const ListBooks = (props) => {
             // let idx = userBooks.indexOf(res.id);
             let found = userBooks.find(book => book.id === res.id);
             if (found) {
-                console.log('IDX::', found);
+                // console.log('IDX::', found);
                 res.shelf = found.shelf;
             } 
             // userBooks.some(book => book.id === res)
