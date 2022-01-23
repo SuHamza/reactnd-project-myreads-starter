@@ -54,7 +54,7 @@ const BooksApp = (props) => {
             />}>
           </Route>
           <Route path='/search' element={
-            <SearchPage updateShelf={updateShelf} search={true} userBooks={books} />
+            <SearchPage updateShelf={updateShelf} userBooks={books} />
           }>
           </Route>
         </Routes>
