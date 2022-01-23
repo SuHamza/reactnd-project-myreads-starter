@@ -7,35 +7,45 @@ const SearchPage = (props) => {
     const userBooks = props.userBooks;
    
     // Initialize Search Query State
-  const [query, setQuery] = useState('');
-  // Initialize Search Result State
-  const [searchResult, setSearchResult] = useState([]);
+    const [query, setQuery] = useState('');
+    // Initialize Search Result State
+    const [searchResult, setSearchResult] = useState([]);
+    // No Results Flag
+    const [noResults, setNoResults] = useState(false);
 
-  // Update Search Query
-  const updateQuery = (query) => {
-    // setQuery(query.trim());
-    if (query !== '')
-    {
-      BooksAPI.search(query)
-        .then((res) => {
-        setSearchResult(res)
-      })
-      
+    // Update Search Query
+    const updateQuery = (query) => {
+        // setQuery(query.trim());
+        if (query === '') {
+            setSearchResult([]);
+            setNoResults(false);
+        }
+        else
+        {
+        BooksAPI.search(query)
+            .then((res) => {
+                setSearchResult(res);
+                setNoResults(false);
+            })
+            .catch(
+                setNoResults(true)
+            )
+        
+        }
+        // console.log('Search Result::: ', searchResult);
+        
     }
-    console.log('Search Result::: ', searchResult);
+
+    useEffect(() => {
+        let isMounted = true;
+        if(isMounted)
+        {
+        updateQuery(query);
+        }
+        return () => { isMounted = false }; // cleanup toggles value, if unmounted
+    }, [query]);
+
     
-  }
-
-  useEffect(() => {
-    let isMounted = true;
-    if(isMounted)
-    {
-      updateQuery(query);
-    }
-    return () => { isMounted = false }; // cleanup toggles value, if unmounted
-  }, [query]);
-
-
     return (
         <div className="search-books">
             <div className="search-books-bar">
@@ -56,16 +66,19 @@ const SearchPage = (props) => {
                 <input 
                   type="text" placeholder="Search by title or author"
                   value={query}
-                  onChange={(event) => setQuery(event.target.value.trim())}
+                  onChange={(event) => setQuery(event.target.value)}
                 />
 
               </div>
             </div>
             <div className="search-books-results">
               {/* Search Result should be fully loaded before listing books */
-                searchResult.length &&
+                (searchResult.length && !noResults) ?
                 (
                     <ListBooks books={searchResult} updateShelf={props.updateShelf} search={true} userBooks={userBooks} />
+                )
+                : (
+                    <div>No Results Found!</div>
                 )
               }
             </div>

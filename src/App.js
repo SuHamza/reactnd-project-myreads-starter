@@ -35,7 +35,7 @@ const BooksApp = (props) => {
   // Update Book Shelf
   const updateShelf = (shelf, book) => {
     book.shelf = shelf;
-    console.log(book);
+    // console.log(book);
     // setBooks({...books, [book.id]: book});
     const newBooks = [...books];
     newBooks[newBooks.indexOf(book.id)] = book;

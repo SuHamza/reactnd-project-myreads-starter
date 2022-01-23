@@ -7,7 +7,7 @@ const ListBooks = (props) => {
     const search = props.search;
     if (search) {
         const userBooks = props.userBooks;
-        console.log('UserBooks:::', userBooks);
+        // console.log('UserBooks:::', userBooks);
         // Check if result already listed to get its shelf
         books.map((res) => {
             // If book has no shelf key
@@ -35,7 +35,7 @@ const ListBooks = (props) => {
                 <ol className="books-grid">
                     {books.filter(book => book.shelf === "currentlyReading")
                     .map((book) => (
-                        <ListBook book={book} updateShelf={props.updateShelf} />
+                        <ListBook key={book.id} book={book} updateShelf={props.updateShelf} />
 
                     ))}
                 </ol>
