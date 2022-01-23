@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import * as BooksAPI from './BooksAPI'
-import './App.css'
-import ListBooks from './ListBooks';
+import './App.css';
+import Home from './Home';
 import SearchPage from './SearchPage';
+import { Routes, Route } from 'react-router-dom';
 
 /** Convert Classes to Functional Components
  * to be able to use Hooks
@@ -18,7 +19,7 @@ const BooksApp = (props) => {
   //   showSearchPage: false
   // }
   
-  const [showSearchPage, setShowSearchPage] = useState(false);
+  // const [showSearchPage, setShowSearchPage] = useState(false);
   // Initialize books State
   const [books, setBooks] = useState([]);
   
@@ -45,24 +46,18 @@ const BooksApp = (props) => {
  
   return (
       <div className="app">
-        {showSearchPage ? (
-          <SearchPage updateShelf={updateShelf} search={true} userBooks={books} setShowSearchPage={setShowSearchPage} />
-        ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            {/* Books data should be fully loaded before listing books */
-             books.length && (
-              <ListBooks books={books} updateShelf={updateShelf} search={false} />
-             )
-            }
-            
-            <div className="open-search">
-              <button onClick={() => setShowSearchPage({ showSearchPage: true })}>Add a book</button>
-            </div>
-          </div>
-        )}
+        {/* Add Routes to the APP */}
+        <Routes>
+          {/* Main Route */}
+          <Route path='/*' element={<Home
+              books={books} updateShelf={updateShelf}
+            />}>
+          </Route>
+          <Route path='/search' element={
+            <SearchPage updateShelf={updateShelf} search={true} userBooks={books} />
+          }>
+          </Route>
+        </Routes>
       </div>
     )
 }
